@@ -18,6 +18,7 @@ if (length===true){
 
 }
   if (hasLower === true) {
+    
     for(var i=0; i<lowercase.length; i++){
       console.log(lowercase[i])
      }
