@@ -16,3 +16,5 @@ WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 
 I added variables for the upper and lower case letters. Then variables for numbers and symbols. I then created a function that would prompt a message of if you wanted ot have these features on our password. Then I created if's depending if they confirm they want the certain aspect of there password and to create a random pool for the things they selected. 
+
+![Alt text](<Screenshot 2023-11-28 195406.png>)

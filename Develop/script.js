@@ -6,39 +6,53 @@ var symbols = "!#$%&()*+,-./:;<=>?@[]^_{|}~".split("");
 
 function generatePassword() {
   var password = [];
-  var randomPool = []
-  var length = prompt(
-    "How long do you want your password to be?(Between 8-128)"
-  );
-  var hasLower = confirm("Would you like your password to contain lowercase?");
-  var hasUpper = confirm("Would you like your password to contain uppercase?");
-  var hasNumber = confirm("Would you like your password to contain numbers?");
-  var hasSymbol = confirm("Would you like your password to contain symbols?");
-if (length===true){
+  var randomPool = [];
+  var length = prompt("How long do you want your password to be? (Between 8-128)");
 
+  // Validate the length input
+  while (length < 8 || length > 128 || isNaN(length)) {
+    length = prompt("Please enter a valid length between 8 and 128:");
+  }
+
+  var hasLower = confirm("Include lowercase characters?");
+  var hasUpper = confirm("Include uppercase characters?");
+  var hasNumber = confirm("Include numeric characters?");
+  var hasSymbol = confirm("Include special characters?");
+
+  // Validate at least one character type is selected
+  while (!(hasLower || hasUpper || hasNumber || hasSymbol)) {
+    alert("You must select at least one character type.");
+    hasLower = confirm("Include lowercase characters?");
+    hasUpper = confirm("Include uppercase characters?");
+    hasNumber = confirm("Include numeric characters?");
+    hasSymbol = confirm("Include special characters?");
+  }
+
+  // Build the randomPool based on selected character types
+  if (hasLower) {
+    randomPool = randomPool.concat(lowercase);
+  }
+
+  if (hasUpper) {
+    randomPool = randomPool.concat(uppercase);
+  }
+
+  if (hasNumber) {
+    randomPool = randomPool.concat(numbers);
+  }
+
+  if (hasSymbol) {
+    randomPool = randomPool.concat(symbols);
+  }
+
+  // Generate the password
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * randomPool.length);
+    password.push(randomPool[randomIndex]);
+  }
+
+  return password.join("");
 }
-  if (hasLower === true) {
-    
-    for(var i=0; i<lowercase.length; i++){
-      console.log(lowercase[i])
-     }
-  }
-
-  if (hasUpper === true) {
-    randomPool(lowercase, uppercase=password)
-  }
-
-  if (hasNumber === true) {
-    randomPool(lowercase, uppercase,numbers=password)
-  }
-
-  if (hasSymbol === true) {
-  }
-  randomPool(lowercase,uppercase,numbers,symbols=password)
-
-
-  return password.join("")
- }
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -53,3 +67,4 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
